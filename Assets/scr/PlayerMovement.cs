@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 15.0f;
+    Vector3 startPos;
+    private void StartGame()
+    {
+        startPos = new Vector3(0, 1, 0);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +44,13 @@ public class PlayerMovement : MonoBehaviour
         // normalized - move equally in all directions
         transform.position += new Vector3(x, 0, z).normalized * speed * Time.deltaTime;
 
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            print("Game Over");
+            transform.position = startPos;
+        }
     }
 }
