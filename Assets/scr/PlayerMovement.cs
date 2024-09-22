@@ -6,14 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 15.0f;
     Vector3 startPos;
-    private void StartGame()
-    {
-        startPos = new Vector3(0, 1, 0);
-    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        Vector3 vector3 = new Vector3(0, 1, 0);
+        startPos = vector3;
     }
 
     // Update is called once per frame
