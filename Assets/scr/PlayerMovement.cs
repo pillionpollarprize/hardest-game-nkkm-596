@@ -5,12 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 15.0f;
-    Vector3 startPos;
+    Vector3 startPos = new Vector3();
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 vector3 = new Vector3(0, 1, 0);
-        startPos = vector3;
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -37,6 +36,10 @@ public class PlayerMovement : MonoBehaviour
         //var - select the type of variable
         var x = Input.GetAxisRaw("Horizontal");
         var z = Input.GetAxisRaw("Vertical");
+
+        // look at the direction of the movement
+        if(x != 0 || z != 0) // rotate only if there is movement
+            transform.forward = new Vector3(x, 0, z);
 
         // normalized - move equally in all directions
         transform.position += new Vector3(x, 0, z).normalized * speed * Time.deltaTime;

@@ -27,29 +27,20 @@ public class FollowPath : MonoBehaviour
         // allow 0.3f m of error
         if (Vector3.Distance(transform.position, path[index]) < 0.3f)
         {
-            if (reverse)
+            index++;
+
+            //if index is greater than or equal to the number of elements in the list
+            if(index == path.Count - 1)
             {
-                index = index - 1;
+                index = 0;
+
+                if (reverse) path.Reverse();
             }
-            else 
-            {
-                index++;
-            }
-        }
-        else if (index == path.Count - 1)
-        {
-            index = 0;
         }
 
         transform.LookAt(path[index]);
-        if (reverse)
-        {
-            transform.position -= transform.forward * speed * Time.deltaTime;
-        }
-        else 
-        {
-            transform.position += transform.forward * speed * Time.deltaTime ;
-        }
+        transform.position += transform.forward * speed * Time.deltaTime ;
+
     }
     //ondrawgizmos is a unity function that is called when the object is selected
     private void OnDrawGizmos()
@@ -59,7 +50,7 @@ public class FollowPath : MonoBehaviour
         //Gizmos.DrawLine draws a line between two points
 
         Gizmos.color = Color.blue;
-        for (int i = 0; i < path.Count; i++)
+        for (int i = 0; i < path.Count - 1; i++)
         {
             Gizmos.DrawLine(path[i], path[i + 1]);
         }
